@@ -71,3 +71,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+Criar uma api para cadastro de usuario, login, update de usuario e get de usaurio. Utilizar autenticação por JWT, o get de usuario deve ser pela propria autenticação, o update do usuario deve ser com a rota autenticada, assim como o Delete.
+obs: todos os dados do usuario devem ser validados.
+A unica rota que nao será autenticada é o post de cadastro de usuario
+e o post de login
+as outras rotas, serão
