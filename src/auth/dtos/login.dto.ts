@@ -7,5 +7,6 @@ export class LoginDto{
  
   @IsNotEmpty({message:MessagesHelper.AUTH_PASSWORD_NOT_FOUND})
   password: string;
+
 } 
- //@IsEmail   @IsNotEmpty - São decorators do classvalidador que já valida se o campo é válido ou não
+
