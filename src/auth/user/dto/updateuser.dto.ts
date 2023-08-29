@@ -26,6 +26,10 @@ export class UpdateUserDto {
   @IsNotEmpty({message: MessagesHelper.REGISTER_NUMERO_NOT_VALID})
   numero:number;
 
+  @IsNotEmpty({message: MessagesHelper.REGISTER_BAIRRO_NOT_VALID})
+  @IsString({message: MessagesHelper.REGISTER_BAIRRO_NOT_VALID})
+  bairro: string;
+
   @IsNotEmpty({message: MessagesHelper.REGISTER_CIDADE_NOT_VALID})
   @IsString({message: MessagesHelper.REGISTER_CIDADE_NOT_VALID})
   cidade: string;

@@ -27,6 +27,9 @@ export class User {
     numero:number;
 
     @Prop({required: true})
+    bairro:string;
+    
+    @Prop({required: true})
     cidade:string;
 
     @Prop({required: true})
