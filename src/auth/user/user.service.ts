@@ -12,8 +12,8 @@ import { MessagesHelper } from "../helpers/messages.helper";
 //@InjectModel (Vem do mongoose para injetar o modelo)
 @Injectable()
 export class UserService{
-   constructor(@InjectModel(User.name) private readonly userModel:Model<UserDocument>){}
-
+   constructor(@InjectModel(User.name) private readonly userModel:Model<UserDocument>,){}
+ 
    async create(dto: RegisterDto){
         dto.password = CryptoJs.AES.encrypt(dto.password, process.env.USER_SECRET_KEY).toString();
         const createUser = new this.userModel(dto);
@@ -44,7 +44,22 @@ export class UserService{
       //criar um serviço que traga o usuario por Id, e retorna se o usuario existe através deste ID
 
       async getUserById(id:string){
-          return await this.userModel.findById(id);    
+         const user = await this.userModel.findById(id); 
+         return {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            cpf:user.cpf,
+            telefone:user.telefone,
+            rua:user.rua,
+            numero:user.numero,
+            bairro:user.bairro,
+            cidade:user.cidade,
+            estado:user.estado,
+            cep:user.cep,
+            fotoPerfil:user.fotoPerfil,
+            id: user._id.toString()
+          };   
           }
 
       async updateUser(id : string, dto: UpdateUserDto){ 

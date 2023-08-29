@@ -18,6 +18,10 @@ export class UpdateUserDto {
 
   @IsNotEmpty({ message: MessagesHelper.REGISTER_TELEFONE_NOT_VALID })
   telefone: string;
+  
+  @IsNotEmpty({ message: MessagesHelper.REGISTER_CEP_NOT_VALID })
+  @IsString({ message: MessagesHelper.REGISTER_CEP_NOT_VALID })
+  cep: string;
 
   @IsNotEmpty({message: MessagesHelper.REGISTER_RUA_NOT_VALID})
   @MinLength(2,{message: MessagesHelper.REGISTER_RUA_NOT_VALID})
@@ -26,18 +30,17 @@ export class UpdateUserDto {
   @IsNotEmpty({message: MessagesHelper.REGISTER_NUMERO_NOT_VALID})
   numero:number;
 
+  @IsNotEmpty({message: MessagesHelper.REGISTER_BAIRRO_NOT_VALID})
+  @IsString({message: MessagesHelper.REGISTER_BAIRRO_NOT_VALID})
+  bairro: string;
+
   @IsNotEmpty({message: MessagesHelper.REGISTER_CIDADE_NOT_VALID})
   @IsString({message: MessagesHelper.REGISTER_CIDADE_NOT_VALID})
   cidade: string;
-
   
   @IsNotEmpty({message: MessagesHelper.REGISTER_CIDADE_NOT_VALID})
   @IsString({message: MessagesHelper.REGISTER_CIDADE_NOT_VALID})
   estado: string;
-
-  @IsNotEmpty({ message: MessagesHelper.REGISTER_CEP_NOT_VALID })
-  @IsString({ message: MessagesHelper.REGISTER_CEP_NOT_VALID })
-  cep: string;
 
   @IsString() 
   fotoPerfil: string; 

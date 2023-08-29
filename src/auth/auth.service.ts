@@ -4,6 +4,7 @@ import { MessagesHelper } from "./helpers/messages.helper";
 import { RegisterDto } from "./user/dto/Register.dto";
 import { UserService } from "./user/user.service";
 import { JwtService } from "@nestjs/jwt";
+import { CepService } from "src/cep/cep.service";
 
 
 @Injectable()
@@ -12,7 +13,8 @@ export class AuthService {
     
     constructor(
       private readonly userService: UserService,
-      private readonly jwtService: JwtService //recebemo o serviço na construção
+      private readonly jwtService: JwtService, //recebemos o serviço na construção
+      private readonly cepService: CepService
        ){}
 
     async login(dto: LoginDto) {
@@ -34,8 +36,19 @@ export class AuthService {
       this.logger.debug('register - started');
       if(await this.userService.existsByEmail(dto.email)){       
           throw new BadRequestException(MessagesHelper.REGISTER_EXIST_EMAIL_ACCOUNT);         
-      }    
-        console.log(dto.email)
-        await this.userService.create(dto);        
+      }   
+      const endereco = this.cepService.getAddressByCep(dto.cep);
+      if(!endereco){       
+        throw new BadRequestException('cep invalido');         
+    }   
+         //dto.rua = endereco?.logradouro;
+         
+       
+ 
+
+
+    
+        await this.userService.create(dto);   
+
     }
  }

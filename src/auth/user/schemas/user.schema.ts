@@ -21,19 +21,23 @@ export class User {
     telefone:string;
 
     @Prop({required: true})
+    cep:string;
+
+    @Prop({required: true})
     rua:string;
 
     @Prop()
     numero:number;
 
     @Prop({required: true})
+    bairro:string;
+
+    @Prop({required: true})
     cidade:string;
 
     @Prop({required: true})
     estado:string;
-
-    @Prop({required: true})
-    cep:string;
+   
     
     @Prop()
     fotoPerfil:string;  

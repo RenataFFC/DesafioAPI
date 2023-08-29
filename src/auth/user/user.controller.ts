@@ -2,34 +2,23 @@ import { BadRequestException, Body, Controller, Delete, Get, HttpCode, HttpStatu
 import { UserService } from './user.service';
 import { MessagesHelper } from '../helpers/messages.helper';
 import { UpdateUserDto } from './dto/updateuser.dto';
+import { CepService } from 'src/cep/cep.service';
 
 @Controller("user")
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+      private readonly userService: UserService,
+      private readonly cepService: CepService,
+  ){}
 
   @Get() // estamos criando uma rota privada
   async getUser(@Request() req) {
     const {userId} = req?.user;
     const user = await this.userService.getUserById(userId); 
-
     if(!user){
        throw new BadRequestException(MessagesHelper.GET_USER_NOT_FOUND);
     }
-
-    return {
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      cpf:user.cpf,
-      telefone:user.telefone,
-      rua:user.rua,
-      numero:user.numero,
-      cidade:user.cidade,
-      estado:user.estado,
-      cep:user.cep,
-      fotoPerfil:user.fotoPerfil,
-      id: user._id.toString()
-    };
+    return user;    
   }
 
     @Put()  //Atualiza os dados do novo usuario
@@ -38,6 +27,27 @@ export class UserController {
       const {userId} = req.user; 
       await this.userService.updateUser(userId,dto); 
     } 
+
+
+    @Put(':id')
+    async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+      const updatedUser = await this.userService.updateUser(id, updateUserDto);
+    
+      // Consulta o CEP para obter o endereço e atualiza no usuário
+     /* if (updateUserDto.cep) {
+        const endereco = await this.cepService.getAddressByCep(updateUserDto.cep);
+        updatedUser.cep = endereco.cep;
+        updatedUser.rua = endereco.logradouro;
+        updatedUser.numero = endereco.logradouro; 
+        updatedUser.bairro = endereco.bairro;
+        updatedUser.cidade = endereco.localidade;
+        updatedUser.estado = endereco.estado;  
+        
+      }*/
+    
+      return this.userService.updateUser(id, updatedUser);
+    }
+
 
     @Delete(':id')
     async delete(@Param('id') id:string ) {

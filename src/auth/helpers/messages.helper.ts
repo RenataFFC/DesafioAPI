@@ -13,6 +13,7 @@ export const MessagesHelper ={
   REGISTER_TELEFONE_NOT_VALID: 'O número de telefone informado não é válido',
   REGISTER_RUA_NOT_VALID: 'Rua informada não é válida',
   REGISTER_NUMERO_NOT_VALID: 'O número informado não é válido',
+  REGISTER_BAIRRO_NOT_VALID: 'o Bairro informado não é válido',
   REGISTER_CIDADE_NOT_VALID: 'A cidade informada não é válida',
   REGISTER_ESTADO_NOT_VALID: 'O Estado informado não é válido',
   REGISTER_CEP_NOT_VALID: 'O CEP informado não é válido',   
