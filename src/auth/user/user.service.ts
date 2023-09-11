@@ -3,16 +3,14 @@ import { User, UserDocument } from "./schemas/user.schema";
 import { Model } from "mongoose";
 import * as CryptoJs from 'crypto-js';
 import { RegisterDto } from "./dto/Register.dto";
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { UpdateUserDto } from "./dto/updateuser.dto";
-import { MessagesHelper } from "../helpers/messages.helper";
+import { Injectable } from '@nestjs/common';
 
 
 
 //@InjectModel (Vem do mongoose para injetar o modelo)
 @Injectable()
 export class UserService{
-   constructor(@InjectModel(User.name) private readonly userModel:Model<UserDocument>,){}
+   constructor(@InjectModel(User.name) private readonly userModel:Model<UserDocument>){}
  
    async create(dto: RegisterDto){
         dto.password = CryptoJs.AES.encrypt(dto.password, process.env.USER_SECRET_KEY).toString();
@@ -41,37 +39,5 @@ export class UserService{
        }
        return null;
    }
-      //criar um serviço que traga o usuario por Id, e retorna se o usuario existe através deste ID
-
-      async getUserById(id:string){
-         const user = await this.userModel.findById(id); 
-         return {
-            name: user.name,
-            email: user.email,
-            password: user.password,
-            cpf:user.cpf,
-            telefone:user.telefone,
-            rua:user.rua,
-            numero:user.numero,
-            bairro:user.bairro,
-            cidade:user.cidade,
-            estado:user.estado,
-            cep:user.cep,
-            fotoPerfil:user.fotoPerfil,
-            id: user._id.toString()
-          };   
-          }
-
-      async updateUser(id : string, dto: UpdateUserDto){ 
-           return await this.userModel.findByIdAndUpdate(id,dto); 
-      } 
-
-      async findByUsername(name: string): Promise<User> {
-           return await this.userModel.findOne({ name });         
-       }
-
-       async delete(_id: string): Promise<void> {
-         await this.userModel.findByIdAndDelete(_id).exec();
-            }
-    
+          
 }
