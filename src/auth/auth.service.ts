@@ -40,14 +40,10 @@ export class AuthService {
       const endereco = this.cepService.getAddressByCep(dto.cep);
       if(!endereco){       
         throw new BadRequestException('cep invalido');         
-    }   
+      }   
          //dto.rua = endereco?.logradouro;
          
-       
- 
-
-
-    
+          
         await this.userService.create(dto);   
 
     }

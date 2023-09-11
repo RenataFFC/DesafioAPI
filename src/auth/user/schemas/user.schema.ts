@@ -31,7 +31,11 @@ export class User {
 
     @Prop({required: true})
     bairro:string;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 53d96206cbeb64b015ab870499079eebdbdd073e
     @Prop({required: true})
     cidade:string;
 
