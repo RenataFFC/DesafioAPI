@@ -4,12 +4,20 @@ import { Model } from "mongoose";
 import * as CryptoJs from 'crypto-js';
 import { RegisterDto } from "./dto/Register.dto";
 import { Injectable } from '@nestjs/common';
+import { UpdateUserDto } from "./dto/updateuser.dto";
 
 
 
 //@InjectModel (Vem do mongoose para injetar o modelo)
 @Injectable()
 export class UserService{
+   delete(id: string) {
+     throw new Error('Method not implemented.');
+   }
+   updateUser(userId: any, dto: UpdateUserDto) {
+     throw new Error('Method not implemented');
+   }
+   getUserById: any;
    constructor(@InjectModel(User.name) private readonly userModel:Model<UserDocument>){}
  
    async create(dto: RegisterDto){

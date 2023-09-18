@@ -37,7 +37,9 @@ export class AuthService {
       if(await this.userService.existsByEmail(dto.email)){       
           throw new BadRequestException(MessagesHelper.REGISTER_EXIST_EMAIL_ACCOUNT);         
       }   
-      const endereco = this.cepService.getAddressByCep(dto.cep);
+
+
+     /* const endereco = this.cepService.getAddressByCep(dto.cep);
       if(!endereco){       
         throw new BadRequestException('cep invalido');         
       }   
@@ -46,5 +48,6 @@ export class AuthService {
           
         await this.userService.create(dto);   
 
-    }
- }
+    }*/
+  }
+}
